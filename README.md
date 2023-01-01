@@ -1,2 +1,2 @@
 # microstructure
-Simulation and Visualisation of Mesoscale Phenomena
+Libraries for Efficient Simulation and Beautified Visualisation of Mesoscale Phenomena
