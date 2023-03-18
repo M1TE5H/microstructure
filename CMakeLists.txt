@@ -12,7 +12,7 @@ cmake_minimum_required( VERSION 3.14..3.25 )
 # Note: directories:
 #   external for submodule (.gitmodules)
 #   exclude for local
-option ( ENABLE_LOCAL "Enable Local Development Environment" ON )
+option ( ENABLE_LOCAL "Enable Local Development Environment" OFF )
 
 if ( ${ENABLE_LOCAL} )
     set ( EX_DIR exclude )
@@ -21,8 +21,8 @@ else ()
 endif ( ${ENABLE_LOCAL} )
 
 
-option ( ENABLE_TESTS "Conduct Tests" OFF )
-option ( ENABLE_BENCHMARKS "Conduct Benchmarks" OFF )
+option ( ENABLE_TESTS "Conduct Tests" ON )
+option ( ENABLE_BENCHMARKS "Conduct Benchmarks" ON )
 
 option ( ENABLE_BOOST "Enable Boost" OFF )
 option ( ENABLE_FORMAT "Enable Format" OFF )
