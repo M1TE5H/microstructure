@@ -1,6 +1,7 @@
+![cmake](https://www.github.com/M1TE5H/microstructure/actions/workflows/cmake.yml/badge.svg)
 # microstructure
 
-**Framework for Efficient Simulation and Beautified Visualisation of Mesoscale Phenomena**
+**Framework for Efficient Simulation and Beautified Visualisation of Multiscale Mesomechanical Phenomena**
 
 The [`microstructure`](https://github.com/M1TE5H/microstructure) framework constitutes scientific software which is intended to be part of an in-house codebase for materials modelling, simulation and informatics.
 

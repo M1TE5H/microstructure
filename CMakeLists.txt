@@ -21,8 +21,8 @@ else ()
 endif ( ${ENABLE_LOCAL} )
 
 
-option ( ENABLE_TESTS "Conduct Tests" ON )
-option ( ENABLE_BENCHMARKS "Conduct Benchmarks" ON )
+option ( ENABLE_TESTS "Conduct Tests" OFF )
+option ( ENABLE_BENCHMARKS "Conduct Benchmarks" OFF )
 
 option ( ENABLE_BOOST "Enable Boost" OFF )
 option ( ENABLE_FORMAT "Enable Format" OFF )
@@ -47,7 +47,7 @@ set (
     COMPILE_FLAGS
     -Wall
     -Wextra
-    -pendantic
+    -Wpendantic
 )
 
 set ( GLOBAL PROPERTY USE_FOLDERS ON )
@@ -296,6 +296,8 @@ set (
 
 set (
     MICROSTRUCTURE_LIBRARIES
+    learner
+    solver
     subroutine
 )
 

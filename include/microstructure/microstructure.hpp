@@ -1,26 +1,14 @@
 /**
  * \file  microstructure/include/microstructure/microstructure.hpp
- * \brief Main Header
+ * \brief Main Header for the \b microstructure Framework
  */
 
-// c headers
-#include <cassert>
+#ifndef __MICROSTRUCTURE_HPP__
+#define __MICROSTRUCTURE_HPP__
 
-// c++ headers
-#include <iostream>
+#pragma once
 
-
-// microstructure utilities
-#include <utl/utl.hpp>
-
-// microstructure tools
-#include <tool/tool.hpp>
-
-// microstructure libraries
-#include <subroutine/subroutine.hpp>
-
-// local headers
-#include "version.hpp"
+#include "forward.hpp"
 
 namespace microstructure {
 
@@ -29,3 +17,5 @@ namespace microstructure {
     void method ();
 
 } // namespace microstructure
+
+#endif // !__MICROSTRUCTURE_HPP__

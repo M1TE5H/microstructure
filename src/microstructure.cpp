@@ -16,6 +16,8 @@ void microstructure::version() {
   microstructure::tools::tool::version();
 
   // libraries
+  microstructure::libraries::learner::version();
+  microstructure::libraries::solver::version();
   microstructure::libraries::subroutine::version();
 }
 
