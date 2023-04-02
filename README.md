@@ -5,7 +5,7 @@
 [![docs](https://img.shields.io/badge/docs-tbc-orange.svg)](https://www.github.com/M1TE5H/microstructure)
 [![MacOS](https://img.shields.io/badge/MacOS-passing-lime.svg)](https://www.github.com/M1TE5H/microstructure)
 [![Windows](https://img.shields.io/badge/Windows-tbc-orange.svg)](https://www.github.com/M1TE5H/microstructure)
-[![Linux](https://img.shields.io/badge/linux-tbc-orange.svg)](https://www.github.com/M1TE5H/microstructure)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-tbc-orange.svg)](https://www.github.com/M1TE5H/microstructure)
 
 [![DOI](https://img.shields.io/badge/DOI-tbc-cyan.svg)](https://)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg)](https://www.github.com/M1TE5H/microstructure/blob/main/LICENSE)

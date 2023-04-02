@@ -54,6 +54,9 @@ X_MICROSTRUCTURE_NAMESPACE_BEGIN X_MICROSTRUCTURE_NAMESPACE_END
 #include "../../xlib/xsolver/xsolver.hpp"
 
 // local
+
+// core
 #include "xcore/xcore.hpp"
+#include "xconstant/xconstant.hpp"
 #include "xsimulation/xsimulation.hpp"
 #include "xvisualisation/xvisualisation.hpp"
