@@ -2,7 +2,7 @@
 # PROJECT
 # ================
 
-# directories
+# Directories
 build/
 exclude/
 
@@ -48,3 +48,11 @@ exclude/
 # ================
 .DS_Store
 DS_Store
+
+# ================
+# EXPERIMENTAL
+# ================
+
+# Directories
+xmicrostructure/xbuild
+xbuild

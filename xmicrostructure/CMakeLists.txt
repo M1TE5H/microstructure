@@ -44,10 +44,10 @@ set (
 set (
     X_MICROSTRUCTURE_HEADERS
     ${X_MICROSTRUCTURE_HEADER_DIR}/xmicrostructure.hpp
-    ${X_MICROSTRUCTURE_HEADER_DIR}/xcore.hpp
+    ${X_MICROSTRUCTURE_HEADER_DIR}/xcore/xcore.hpp
     ${X_MICROSTRUCTURE_HEADER_DIR}/xcore/xkernel.hpp
-    ${X_MICROSTRUCTURE_HEADER_DIR}/xsimulation.hpp
-    ${X_MICROSTRUCTURE_HEADER_DIR}/xvisualisation.hpp
+    ${X_MICROSTRUCTURE_HEADER_DIR}/xsimulation/xsimulation.hpp
+    ${X_MICROSTRUCTURE_HEADER_DIR}/xvisualisation/xvisualisation.hpp
 )
 
 set (
@@ -58,8 +58,8 @@ set (
 set (
     X_MICROSTRUCTURE_SOURCE
     ${X_MICROSTRUCTURE_SOURCE_DIR}/xmicrostructure.cpp
-    ${X_MICROSTRUCTURE_SOURCE_DIR}/xsimulation.cpp
-    ${X_MICROSTRUCTURE_SOURCE_DIR}/xvisualisation.cpp
+    ${X_MICROSTRUCTURE_SOURCE_DIR}/xsimulation/xsimulation.cpp
+    ${X_MICROSTRUCTURE_SOURCE_DIR}/xvisualisation/xvisualisation.cpp
     ${X_MICROSTRUCTURE_UTILTIES}
     ${X_MICROSTRUCTURE_TOOLS}
     ${X_MICROSTRUCTURE_LIBRARIES}

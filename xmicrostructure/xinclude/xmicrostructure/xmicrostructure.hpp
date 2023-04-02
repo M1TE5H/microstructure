@@ -1,6 +1,8 @@
 #ifndef __X_MICROSTRUCTURE_HPP__
 #define __X_MICROSTRUCTURE_HPP__
 
+#pragma once
+
 #include "xforward.hpp"
 
 namespace xmicrostructure {

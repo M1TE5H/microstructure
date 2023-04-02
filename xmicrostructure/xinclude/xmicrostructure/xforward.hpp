@@ -43,11 +43,17 @@ X_MICROSTRUCTURE_NAMESPACE_BEGIN X_MICROSTRUCTURE_NAMESPACE_END
 	#define X_MICROSTRUCTURE_XELATEX 1
 #endif
 
+// utilities
 #include "../../xutilities/xformatter/xformatter.hpp"
 
+// tools
+#include "../../xtools/xrandomiser/xrandomiser.hpp"
+
+// libraries
 #include "../../xlib/xlearner/xlearner.hpp"
 #include "../../xlib/xsolver/xsolver.hpp"
 
-#include "xcore.hpp"
-#include "xsimulation.hpp"
-#include "xvisualisation.hpp"
+// local
+#include "xcore/xcore.hpp"
+#include "xsimulation/xsimulation.hpp"
+#include "xvisualisation/xvisualisation.hpp"
