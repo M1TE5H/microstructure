@@ -52,7 +52,7 @@ MICROSTRUCTURE_NAMESPACE_BEGIN MICROSTRUCTURE_NAMESPACE_END
 
 // c++20 headers
 #include <concepts>
-#include <coroutine>
+// #include <coroutine>
 #include <numbers>
 #include <ranges>
 #include <span>
