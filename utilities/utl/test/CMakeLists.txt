@@ -1,7 +1,8 @@
-# ----------------------------------------------------------------
-# CMAKE
-# ----------------------------------------------------------------
-cmake_minimum_required ( VERSION 3.14..3.25 )
+# ------------------------------------------------------------------------------
+# UTL : TEST | CMAKE
+# ------------------------------------------------------------------------------
+
+cmake_minimum_required ( VERSION 3.14..3.25 FATAL_ERROR )
 
 set (
     UTILITY_TEST_NAME
@@ -10,7 +11,7 @@ set (
 
 set (
     UTILITY_TEST_SOURCE
-    utl_test.cpp
+    utl.test.cpp
 )
 
 project ( ${UTILITY_TEST_NAME} )
@@ -18,8 +19,10 @@ project ( ${UTILITY_TEST_NAME} )
 enable_testing ()
 
 if ( NOT ( TARGET gtest AND TARGET gtest_main ) )
+
     # TODO: address this fatal error
     message ( FATAL_ERROR "Missing Targets: gtest and gtest_main" )
+
 endif ()
 
 add_executable (

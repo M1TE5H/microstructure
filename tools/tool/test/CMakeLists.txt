@@ -1,6 +1,7 @@
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CMAKE
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required ( VERSION 3.14..3.25 )
 
 set (
@@ -10,7 +11,7 @@ set (
 
 set (
     TOOL_TEST_SOURCE
-    tool_test.cpp
+    tool.test.cpp
 )
 
 project ( ${TOOL_TEST_NAME} )
@@ -18,8 +19,10 @@ project ( ${TOOL_TEST_NAME} )
 enable_testing ()
 
 if ( NOT ( TARGET gtest AND TARGET gtest_main ) )
+
     # TODO: address this fatal error
     message ( FATAL_ERROR "Missing Targets: gtest and gtest_main" )
+
 endif ()
 
 add_executable (

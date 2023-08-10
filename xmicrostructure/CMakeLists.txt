@@ -1,6 +1,19 @@
+# ==============================================================================
+# XMICROSTRUCTURE | CMAKE
+# ==============================================================================
+
 cmake_minimum_required ( VERSION 3.14..3.25 FATAL_ERROR )
 
+
+# ==============================================================================
+# OPTIONS
+# ==============================================================================
+
 option ( ENABLE_TESTS "Enable Tests" ON )
+
+# ==============================================================================
+# COMPILATION
+# ==============================================================================
 
 set (
     CMAKE_CXX_STANDARD 20
@@ -88,7 +101,9 @@ find_package ( fmt )
 target_link_libraries ( xmicrostructure fmt::fmt )
 
 if ( ${ENABLE_TESTS} )
+
     add_subdirectory ( xtest )
+
 endif ( ${ENABLE_TESTS} )
 
 add_subdirectory ( xapplications )

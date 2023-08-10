@@ -1,7 +1,8 @@
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CMAKE
-# ----------------------------------------------------------------
-cmake_minimum_required ( VERSION 3.14..3.25 )
+# ------------------------------------------------------------------------------
+
+cmake_minimum_required ( VERSION 3.14..3.25 FATAL_ERROR )
 
 set (
     MICROSTRUCTURE_BENCHMARK_NAME
@@ -10,7 +11,7 @@ set (
 
 set (
     MICROSTRUCTURE_BENCHMARK_SOURCE
-    microstructure_benchmark.cpp
+    microstructure.benchmark.cpp
 )
 
 project ( ${MICROSTRUCTURE_BENCHMARK_NAME} )

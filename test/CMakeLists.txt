@@ -1,6 +1,7 @@
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CMAKE
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
+
 cmake_minimum_required ( VERSION 3.14..3.25 )
 
 set (
@@ -10,7 +11,7 @@ set (
 
 set (
     MICROSTRUCTURE_TEST_SOURCE
-    microstructure_test.cpp
+    microstructure.test.cpp
 )
 
 project ( ${MICROSTRUCTURE_TEST_NAME} )
@@ -18,7 +19,9 @@ project ( ${MICROSTRUCTURE_TEST_NAME} )
 enable_testing ()
 
 if ( NOT ( TARGET gtest AND TARGET gtest_main ) )
+
     message ( FATAL_ERROR "Missing Targets: gtest and gtest_main" )
+
 endif ()
 
 add_executable (

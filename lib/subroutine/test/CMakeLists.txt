@@ -1,7 +1,8 @@
-# ----------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CMAKE
-# ----------------------------------------------------------------
-cmake_minimum_required ( VERSION 3.14..3.25 )
+# ------------------------------------------------------------------------------
+
+cmake_minimum_required ( VERSION 3.14..3.25 FATAL_ERROR )
 
 set (
     LIBRARY_TEST_NAME
@@ -10,7 +11,7 @@ set (
 
 set (
     LIBRARY_TEST_SOURCE
-    subroutine_test.cpp
+    subroutine.test.cpp
 )
 
 project ( ${LIBRARY_TEST_NAME} )
