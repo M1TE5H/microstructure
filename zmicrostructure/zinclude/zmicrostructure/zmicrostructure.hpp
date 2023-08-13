@@ -8,7 +8,7 @@
  * \code      HTTPS://WWW.GITHUB.COM/M1TE5H/MICROSTRUCTURE
  *
  * \author    M1TE5H
- * \date      2022-01-13--PRESENT
+ * \date      2022-12-31
  * \copyright COPYRIGHT (C) 2022--PRESENT BY M1TE5H
  * \link      HTTPS://WWW.M1TE5H.COM
  *
@@ -48,7 +48,7 @@
 
 #if (!defined(_MSVC_LANG))
 /// @note GCC13 or clang
-#warning "under construction"
+#warning "zmicrostructure | zeroth-iteration research code (under construction)"
 #endif
 
 /*******************************************************************************
@@ -127,6 +127,7 @@
 #include <source_location>
 
 // Local Headers
+#include "zlocation.hpp"
 
 /*******************************************************************************
  * \subsection MACROS
@@ -209,6 +210,18 @@ Z_MICROSTRUCTURE_NAMESPACE(BEGIN)
 // =============================================================================
 // =============================================================================
 
+/*******************************************************************************
+ * \subsection ZDETAIL
+ * -----------------------------------------------------------------------------
+ * \note
+ * \todo
+ ******************************************************************************/
+
+namespace zdetail {
+
+// template <typename IndexN>
+// concept index_t = std::same_as_v<std::size_t, IndexN>;
+
 template <typename LocationT>
 concept zlocatable = requires(LocationT l) {
                        typename LocationT::value_type;
@@ -224,6 +237,17 @@ concept zcontainer = requires(ContainerT c) {
                        c.size();
                        c[0];
                      };
+
+} // namespace zdetail
+
+/*******************************************************************************
+ * \subsection ZLOCATION
+ * -----------------------------------------------------------------------------
+ * \note
+ * \todo
+ ******************************************************************************/
+
+/*
 
 /// @class zlocation
 /// @brief cartesian coordinate
@@ -307,9 +331,9 @@ operator-(zlocation<NumberZ> const& a, zlocation<NumberZ> const& b)
 template <std::integral NumberZ>
 [[nodiscard("use arithmetic overload")]] Z_MICROSTRUCTURE_CONSTSPEC(EVAL,
                                                                     OLOP) auto
-operator*(zlocation<NumberZ> const& zloc, NumberZ const& scale)
+operator*(zlocation<NumberZ> const& zlcn, NumberZ const& scale)
     -> decltype(auto) {
-  auto t{zloc};
+  auto t{zlcn};
   t -= scale;
   return t;
 }
@@ -317,10 +341,10 @@ operator*(zlocation<NumberZ> const& zloc, NumberZ const& scale)
 template <std::integral NumberZ>
 [[nodiscard("use arithmetic overload")]] Z_MICROSTRUCTURE_CONSTSPEC(EVAL,
                                                                     OLOP) auto
-operator/(zlocation<NumberZ> const& zloc, NumberZ const& scale)
+operator/(zlocation<NumberZ> const& zlcn, NumberZ const& scale)
     -> decltype(auto) {
   [[assume(!scale)]];
-  auto t{zloc};
+  auto t{zlcn};
   t /= scale;
   return t;
 }
@@ -342,13 +366,65 @@ operator<=>(zlocation<NumberZ> const& a, zlocation<NumberZ> const& b)
   // return a.horizontal() <=> b.horizontal() && a.vertical() <=> b.vertical();
 }
 
+*/
+
+/*******************************************************************************
+ * \subsection ZLATTICE
+ * -----------------------------------------------------------------------------
+ * \note
+ * \todo
+ ******************************************************************************/
+
+/*
+
 /// @class zlattice
 /// @brief Two-Dimensional Grid Container Data Structure
 
-template <zlocatable LocationT, std::size_t RowsN = 1, std::size_t ColsN = 1,
-          template <typename, std::size_t> class ContainerT = std::array>
-  requires zcontainer<ContainerT<LocationT, ColsN>>
-class zlattice;
+template <typename LatticeT> class zlattice_const_iterator;
+template <typename LatticeT> class zlattice_iterator;
+
+template <template <std::integral> class LocationT = zlocation<int>,
+          std::size_t RowsN, std::size_t ColsN,
+          template <typename, std::size_t> class ContainerT>
+  requires zdetail::zlocatable<LocationT<int>> &&
+           requires zdetail::zcontainer<ContainerT<LocationT, ColsN>>
+class zlattice {
+public:
+  using value_type      = LocationT;
+  using pointer         = LocationT*;
+  using reference       = LocationT&;
+  using const_pointer   = LocationT const*;
+  using const_reference = LocationT const&;
+  using iterator        = zlattice_iterator<zlattice>;
+  using const_iterator  = zlattice_const_iterator<zlattice>;
+
+public:
+  Z_MICROSTRUCTURE_CONSTSPEC(EXPR, CTOR) zlattice() {
+    // std::ranges::fill(*this, LocationT());
+  }
+
+  auto begin() noexcept -> iterator;
+  auto end() noexcept -> iterator;
+
+  auto begin() const noexcept -> const_iterator;
+  auto end() const noexcept -> const_iterator;
+
+  auto cbegin() const noexcept -> const_iterator;
+  auto cend() const noexcept -> const_iterator;
+
+  [[nodiscard("use accessed size")]] Z_MICROSTRUCTURE_CONSTSPEC(EXPR, MTHD)
+      std::unsigned_integral auto size() const noexcept -> std::size_t {
+    return RowsN * ColsN;
+  }
+
+  [[nodiscard("use accessed size")]] Z_MICROSTRUCTURE_CONSTSPEC(EXPR, MTHD)
+      std::unsigned_integral auto max_size() const noexcept -> std::size_t {
+    return RowsN * ColsN;
+  }
+
+private:
+  ContainerT<ContainerT<LocationT, ColsN>, RowsN> m_site;
+};
 
 template <typename LatticeT> class zlattice_const_iterator {
 public:
@@ -363,7 +439,7 @@ public:
   zlattice_const_iterator() = default;
 
   Z_MICROSTRUCTURE_CONSTSPEC(NONE, CTOR)
-  zlattice_const_iterator(iterator_type itr, zlattice<value_type> const* zltc)
+  zlattice_const_iterator(iterator_type itr, zlattice<> const* zltc)
       : m_iterator{itr}, m_zlattice{zltc} {}
 
   Z_MICROSTRUCTURE_CONSTSPEC(NONE, ITER)
@@ -377,43 +453,14 @@ protected:
   friend class zlattice<value_type>;
 
 protected:
-  iterator_type               m_iterator;
-  zlattice<value_type> const* m_zlattice{nullptr};
+  iterator_type     m_iterator;
+  zlattice<> const* m_zlattice{nullptr};
 };
 
 template <typename LatticeT>
 class zlattice_iterator : public zlattice_const_iterator<LatticeT> {};
 
-template <zlocatable LocationT, std::size_t RowsN, std::size_t ColsN,
-          template <typename, std::size_t> class ContainerT>
-  requires zcontainer<ContainerT<LocationT, ColsN>>
-class zlattice {
-public:
-  using value_type      = LocationT;
-  using pointer         = LocationT*;
-  using reference       = LocationT&;
-  using const_pointer   = LocationT const*;
-  using const_reference = LocationT const&;
-  using iterator        = zlattice_iterator<zlattice>;
-  using const_iterator  = zlattice_const_iterator<zlattice>;
-
-public:
-  Z_MICROSTRUCTURE_CONSTSPEC(EXPR, CTOR) zlattice() {
-    std::ranges::fill(*this, LocationT());
-  }
-
-  auto begin() noexcept -> iterator;
-  auto end() noexcept -> iterator;
-
-  auto begin() const noexcept -> const_iterator;
-  auto end() const noexcept -> const_iterator;
-
-  auto cbegin() const noexcept -> const_iterator;
-  auto cend() const noexcept -> const_iterator;
-
-private:
-  ContainerT<ContainerT<LocationT, ColsN>, RowsN> m_site;
-};
+*/
 
 // =============================================================================
 // =============================================================================
