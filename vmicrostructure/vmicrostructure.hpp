@@ -16,6 +16,7 @@
 #include <initializer_list>
 #include <iostream>
 #include <thread>
+#include <tuple>
 
 #include <concepts>
 #include <format>
@@ -85,7 +86,7 @@ concept vlocatable = requires(LocationT location) {
                        location.crend();
 
                        location[0];
-                       location.coordinate[0];
+                       location.coordinate(0);
                      };
 
 template <vmeasurable MeasureT = float, std::size_t DimensionN = 2,
@@ -108,6 +109,9 @@ public:
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 public:
+  V_MICROSTRUCTURE_CONST(EXPR, CTOR)
+  vlocation() { std::ranges::fill(m_coordinate, MeasureT()); }
+
   V_MICROSTRUCTURE_CONST(EXPR, CTOR)
   vlocation(std::array<MeasureT, DimensionN> i_coordinate)
       : m_coordinate{i_coordinate} {}
@@ -250,18 +254,35 @@ template <vmeasurable MeasureT, std::size_t DimensionN,
 auto operator<<(std::ostream&                                       os,
                 vlocation<MeasureT, DimensionN, CollectionC> const& location)
     -> std::ostream& {
+  os << "(";
   bool first{true};
-
   for (auto const& coordinate : location) {
     if (first)
       first = false;
     else
-      os << '\t';
+      os << ',';
     os << coordinate;
   }
-
+  os << ")";
   return os;
 }
+
+} // namespace vmicrostructure
+
+/*******************************************************************************
+ * VDOMAIN
+ * -----------------------------------------------------------------------------
+ *
+ ******************************************************************************/
+
+namespace vmicrostructure {
+template <vlocatable LocationT> class vdomain {
+public:
+  V_MICROSTRUCTURE_CONST(EXPR, CTOR) vdomain() = default;
+
+private:
+  std::pair<LocationT, LocationT> m_bound;
+};
 
 } // namespace vmicrostructure
 
@@ -273,10 +294,93 @@ auto operator<<(std::ostream&                                       os,
 
 namespace vmicrostructure {
 
-template <vlocatable LocationT, std::size_t... ExtentsN> class zlattice {
+template <vlocatable LocationT, std::size_t... DemarcationN> class vlattice {
 public:
+  using value_type             = LocationT;
+  using pointer                = LocationT*;
+  using reference              = LocationT&;
+  using const_pointer          = LocationT const*;
+  using const_reference        = LocationT const&;
+  using size_type              = std::size_t;
+  using difference_type        = std::make_signed_t<size_type>;
+
+  using container              = std::array<LocationT, (DemarcationN * ...)>;
+
+  using iterator               = typename container::iterator;
+  using const_iterator         = typename container::const_iterator;
+  using reverse_iterator       = std::reverse_iterator<iterator>;
+  using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+
+public:
+  V_MICROSTRUCTURE_CONST(EXPR, CTOR) vlattice() = default;
+
+  /// @todo
+  V_MICROSTRUCTURE_CONST(EXPR, CTOR)
+  vlattice(vdomain<LocationT> i_domain) {}
+
+public:
+  V_MICROSTRUCTURE_CONST(EXPR, ITER) auto begin() noexcept -> iterator {
+    return m_site.begin();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto begin() const noexcept -> const_iterator { return m_site.begin(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER) auto end() noexcept -> iterator {
+    return m_site.end();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto end() const noexcept -> const_iterator { return m_site.end(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto rbegin() noexcept -> reverse_iterator { return m_site.rbegin(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto rbegin() const noexcept -> const_reverse_iterator {
+    return m_site.rbegin();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER) auto rend() noexcept -> reverse_iterator {
+    return m_site.rend();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto rend() const noexcept -> const_reverse_iterator { return m_site.rend(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto cbegin() const noexcept -> const_iterator { return m_site.cbegin(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto cend() const noexcept -> const_iterator { return m_site.cend(); }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto crbegin() const noexcept -> const_reverse_iterator {
+    return m_site.crbegin();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, ITER)
+  auto crend() const noexcept -> const_reverse_iterator {
+    return m_site.crend();
+  }
+
+  V_MICROSTRUCTURE_CONST(EXPR, MTHD) auto size() const noexcept -> std::size_t {
+    return m_site.size();
+  }
+
 private:
+  std::array<LocationT, (DemarcationN * ...)> m_site;
 };
+
+template <vlocatable LocationT, std::size_t... DemarcationN>
+auto operator<<(std::ostream&                               os,
+                vlattice<LocationT, DemarcationN...> const& lattice)
+    -> std::ostream& {
+  for (auto const& site : lattice) {
+    os << site << '\n';
+  }
+  return os;
+}
 
 } // namespace vmicrostructure
 
