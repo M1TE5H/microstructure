@@ -2,7 +2,7 @@
 # CMAKE
 # ------------------------------------------------------------------------------
 
-cmake_minimum_required ( VERSION 3.14..3.25 )
+cmake_minimum_required ( VERSION 3.14..3.25 FATAL_ERROR )
 
 set (
     MICROSTRUCTURE_TEST_NAME
